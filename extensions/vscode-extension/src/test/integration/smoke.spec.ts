@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { activate } from '../../core/activation';
 import { on } from '../../core/events';
-import { CMD_PRECOMMIT, CMD_OPEN_ZEROUI_VIEW, EVT_RECEIPT_UPDATED, CMD_SHOW_LAST_RECEIPT } from '../../core/constants';
+import { CMD_RUN_PRECOMMIT, CMD_OPEN_ZEROUI_VIEW, EVT_RECEIPT_UPDATED, CMD_SHOW_LAST_RECEIPT } from '../../core/constants';
 
 describe('Zero-UI smoke: precommit → pill + Problems + webview', function () {
   this.timeout(10000);
@@ -14,7 +14,7 @@ describe('Zero-UI smoke: precommit → pill + Problems + webview', function () {
 
   before(() => {
     // Guard required constants
-    if (!CMD_PRECOMMIT || !CMD_OPEN_ZEROUI_VIEW || !EVT_RECEIPT_UPDATED || !CMD_SHOW_LAST_RECEIPT) {
+    if (!CMD_RUN_PRECOMMIT || !CMD_OPEN_ZEROUI_VIEW || !EVT_RECEIPT_UPDATED || !CMD_SHOW_LAST_RECEIPT) {
       // Skip suite if wiring constants are not defined yet
       // eslint-disable-next-line no-console
       console.warn('Skipping smoke: missing command/event constants');
@@ -47,7 +47,7 @@ describe('Zero-UI smoke: precommit → pill + Problems + webview', function () {
 
     // Fire command and await event
     const gotEvent = new Promise<void>((resolve) => on(EVT_RECEIPT_UPDATED, () => resolve()));
-    await vscode.commands.executeCommand(CMD_PRECOMMIT);
+    await vscode.commands.executeCommand(CMD_RUN_PRECOMMIT);
     await gotEvent;
 
     // Verify Problems diagnostic exists on synthetic target
