@@ -1,0 +1,15 @@
+{
+  "policy_version_ids": ["pv-demo-1"],
+  "risk_scoring": {
+    "weights": {
+      "loc": 1.0,
+      "file_count": 2.0,
+      "sensitive_paths_hit": 5.0
+    },
+    "band_boundaries": {
+      "Low": 10,
+      "Medium": 30,
+      "High": 100
+    }
+  }
+}

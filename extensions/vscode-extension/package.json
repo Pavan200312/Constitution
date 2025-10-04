@@ -1,0 +1,48 @@
+{
+  "name": "coaxcraft-platform",
+  "displayName": "CoaxCraft Platform",
+  "description": "Risk assessment and policy enforcement for code repositories",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:coaxcraft.runPrecommit",
+    "onCommand:coaxcraft.showLastReceipt",
+    "onCommand:coaxcraft.openZeroUI"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "coaxcraft.runPrecommit",
+        "title": "Run Precommit Check",
+        "category": "CoaxCraft"
+      },
+      {
+        "command": "coaxcraft.showLastReceipt",
+        "title": "Show Last Receipt",
+        "category": "CoaxCraft"
+      },
+      {
+        "command": "coaxcraft.openZeroUI",
+        "title": "Open Risk Card",
+        "category": "CoaxCraft"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+}
+
