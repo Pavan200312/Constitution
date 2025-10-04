@@ -3,7 +3,7 @@
 
 import * as vscode from 'vscode';
 import { on } from './events';
-import { CMD_RUN_PRECOMMIT, CMD_SHOW_LAST_RECEIPT, CMD_OPEN_ZEROUI_VIEW, EVT_RECEIPT_UPDATED } from './constants';
+import { CMD_PRECOMMIT, CMD_SHOW_LAST_RECEIPT, CMD_OPEN_ZEROUI_VIEW, EVT_RECEIPT_UPDATED } from './constants';
 import { runPrecommit } from '../commands/precommit';
 import { showLastReceipt } from '../commands/show_last_receipt';
 import { initStatusBar, updateStatusBar } from '../ui/status_bar';
@@ -15,7 +15,7 @@ import { initPolicyWatcher } from '../services/policy_watcher';
 let latest: any;
 
 export function activate(ctx: vscode.ExtensionContext): void {
-    if (!CMD_RUN_PRECOMMIT || !CMD_SHOW_LAST_RECEIPT || !CMD_OPEN_ZEROUI_VIEW || !EVT_RECEIPT_UPDATED) {
+    if (!CMD_PRECOMMIT || !CMD_SHOW_LAST_RECEIPT || !CMD_OPEN_ZEROUI_VIEW || !EVT_RECEIPT_UPDATED) {
         throw new Error("TODO[EVIDENCE_NEEDED:constants]");
     }
     
@@ -24,7 +24,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
     on(EVT_RECEIPT_UPDATED, (r) => { latest = r; updateStatusBar(String(r?.risk_band || '—')); updateProblems(r); showRiskCard(r); });
     
     ctx.subscriptions.push(
-        vscode.commands.registerCommand(CMD_RUN_PRECOMMIT, runPrecommit),
+        vscode.commands.registerCommand(CMD_PRECOMMIT, runPrecommit),
         vscode.commands.registerCommand(CMD_SHOW_LAST_RECEIPT, showLastReceipt),
         vscode.commands.registerCommand(CMD_OPEN_ZEROUI_VIEW, () => showRiskCard(latest || {}))
     );
